@@ -56,7 +56,19 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {
                         message: 'The content is required and cannot be empty'
+                    },
+
+                callback: {
+
+                    message: 'The date is not in the range',
+                    callback: function(value, validators) {
+                        var m = new moment(value, 'YYYY/MM/DD', true);
+                        if (!m.isValid()) {
+                            return false;
+                        }
+                        return m.isAfter('2000/01/01') && m.isBefore('2020/12/30');
                     }
+                }
 
                 }
             }
